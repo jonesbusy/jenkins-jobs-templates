@@ -1,4 +1,11 @@
 node('master') {
+	stage('Checkout') {
+		checkout([
+			'$class' : 'GitSCM',
+			branches : scm.branches,
+			userRemoteConfigs: scm.userRemoteConfigs,
+		])
+	}
 	stage('Generate jobs') {
 		jobDsl([
 			ignoreExisting           : false,
